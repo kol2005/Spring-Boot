@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<th:block th:include="head"></th:block>
+</head>
+<body>
+
+<div class="container">
+	<form method="post" th:object="${book}" class="">
+		<div class="form-group">
+			<label for="title">제목</label>
+			<input class="form-control" th:field="*{title}">
+		</div>
+		<div class="form-group">
+			<label for="comp">출판사</label>
+			<input class="form-control" th:field="*{comp}">
+		</div>
+		<div class="form-group">
+			<label for="auth">저자</label>
+			<input class="form-control" th:field="*{auth}">
+		</div>
+		<div class="form-group">
+			<label for="year">출판연도</label>
+			<input class="form-control" th:field="*{year}">
+		</div>
+		<div class="form-group">
+			<label for="price">가격</label>
+			<input class="form-control" th:field="*{price}">
+		</div>
+		<button>저장</button>
+	</form>
+</div>
+
+</body>
+</html>

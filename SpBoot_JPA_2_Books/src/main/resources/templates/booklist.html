@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<th:block th:include="head"></th:block>
+</head>
+<script>
+	$(function() {
+
+		$(document).on("click", "#btn_save", function() {
+			document.location.href = "/book/insert"
+		})
+
+		$(document).on("click", ".book_tr", function() {
+			let id = $(this).data("book-id")
+			//alert(id)
+			document.location.href = "/book/update?id=" + id
+		})
+
+	})
+</script>
+<body>
+
+	<div class="container">
+
+		<table class="table">
+			<tr>
+				<th>제목</th>
+				<th>출판사</th>
+				<th>저자</th>
+				<th>출판연도</th>
+				<th>가격</th>
+				<th>비고</th>
+			</tr>
+
+			<tr th:each="book : ${bookList}" th:data-book-id="${book.id}">
+				<td th:text="${book.title}" th:attr="data-book-id=${book.id}"
+					class="book_tr">제목</td>
+				<td th:text="${book.comp}">출판사</td>
+				<td th:text="${book.auth}">저자</td>
+				<td th:text="${book.year}">출판연도</td>
+				<td th:text="${book.price}">가격</td>
+				<td th:data-user-id="${book.id}"><a
+					th:href="@{/book/delete(id=${book.id})}">삭제</a></td>
+			</tr>
+
+		</table>
+		
+		<th:block th:include="page">
+
+		<button id="btn_save">도서정보 입력</button>
+	</div>
+
+</body>
+</html>
