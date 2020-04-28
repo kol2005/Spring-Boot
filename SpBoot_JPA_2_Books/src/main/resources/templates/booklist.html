@@ -32,7 +32,7 @@
 				<th>비고</th>
 			</tr>
 
-			<tr th:each="book : ${bookList}" th:data-book-id="${book.id}">
+			<tr th:each="book : ${bList}" th:data-book-id="${book.id}">
 				<td th:text="${book.title}" th:attr="data-book-id=${book.id}"
 					class="book_tr">제목</td>
 				<td th:text="${book.comp}">출판사</td>
@@ -45,7 +45,7 @@
 
 		</table>
 		
-		<th:block th:include="page">
+		<th:block th:include="page"/>
 
 		<button id="btn_save">도서정보 입력</button>
 	</div>

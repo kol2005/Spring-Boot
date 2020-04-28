@@ -24,14 +24,23 @@ public class BookService {
 	 *  Pageable, Page, PageRequest 클래스를 사용하여
 	 *  pagination을 구현
 	 */
+//	public Page<BookVO> getPageList(Pageable page) {
+//		
+//		int pageNum = 0;
+//		if(page.getPageNumber() == 0) pageNum = 0;
+//		else pageNum = page.getPageNumber() - 1;
+//		
+//		page = PageRequest.of(pageNum, 10);
+//		
+//		return bookDao.findAll(page);
+//		
+//	}
 	public Page<BookVO> getPageList(Pageable page) {
 		
 		int pageNum = 0;
 		if(page.getPageNumber() == 0) pageNum = 0;
 		else pageNum = page.getPageNumber() - 1;
-		
-		page = PageRequest.of(pageNum, 10);
-		
+		page = PageRequest.of(pageNum,10);
 		return bookDao.findAll(page);
 		
 	}
@@ -42,8 +51,8 @@ public class BookService {
 	}
 
 	public List<BookVO> selectAll() {
-		List<BookVO> bookList = bookDao.findAll();
-		return bookList;
+		List<BookVO> bList = bookDao.findAll();
+		return bList;
 	}
 
 	public Optional<BookVO> findById(long bookId) {

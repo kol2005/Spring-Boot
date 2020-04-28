@@ -27,8 +27,10 @@ public class BookController {
 //	@ResponseBody
 	@RequestMapping(value="/pagelist",method=RequestMethod.GET)
 	public String getPageList(@PageableDefault Pageable page,Model model) {
+//	public Page<BookVO> getPageList(@PageableDefault Pageable page,Model model) {
 		Page<BookVO> bookList = bService.getPageList(page);
 		model.addAttribute("bookList",bookList);
+
 		return "booklist";
 //		return bookList;
 	}
@@ -41,8 +43,8 @@ public class BookController {
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String booklist(Model model) {
-		List<BookVO> booksList = bService.selectAll();
-		model.addAttribute("bookList",booksList);
+		List<BookVO> bList = bService.selectAll();
+		model.addAttribute("bList",bList);
 		return "booklist";
 	}
 	
