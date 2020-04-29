@@ -1,5 +1,6 @@
 package com.biz.sec.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,13 +22,16 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 @Builder
 public class UserRole {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "bigint")
 	private Long id;
+
+	@Column(name = "username", columnDefinition = "varchar(64)", length = 64)
 	private String username;
 	private String roleName;
 
@@ -35,10 +39,7 @@ public class UserRole {
 	 * JPA에서 1:N 관계를 설정하려면 두 연결된 클래스에 각각 @OneToMany, @ManyToOne을 설정해준다
 	 */
 	@ManyToOne
-	@JoinColumn(name = "username",
-	referencedColumnName = "username",
-	insertable = false,
-	updatable = false)
+	@JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
 	private UserVO userVO;
 
 }

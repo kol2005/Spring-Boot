@@ -24,59 +24,52 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter@Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
 @Entity
 @Table(name = "tbl_users")
-public class UserVO implements UserDetails{
+public class UserVO implements UserDetails {
 
 	/*
-	 * JPA의 Entity를 선언할때
-	 * id 칼럼(필드변수)는 반드시 class type으로 선언하자
+	 * JPA의 Entity를 선언할때 id 칼럼(필드변수)는 반드시 class type으로 선언하자
 	 * 
-	 * 그렇지 않으면 JPA의 자동완성 method가 작동되지 않는다
-	 * int => Integer
-	 * long => Long
+	 * 그렇지 않으면 JPA의 자동완성 method가 작동되지 않는다 int => Integer long => Long
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "bigint")
 	private Long id;
-	
-	@Column(name = "username", unique = true, length = 64)
+
+	@Column(name = "username", columnDefinition = "varchar(64)", unique = true, length = 64)
 	private String username;
-	
+
 	// 설정하지 않으면 length = 255로 자동생성
 	private String password;
-	
+
 	private boolean enabled;
 	private boolean accountNonExpired;
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
-	
+
 	// DB에 칼럼으로 생성하지 말라
 	@Transient
 	private Collection<? extends GrantedAuthority> authorities;
-	
+
 	private String email;
 	private String phone;
 	private String address;
-	
+
 	/*
-	 * JPA에서 1:N의 관계를 설정하는 부분
-	 * FetchType.LAZY
-	 * 두 테이블을 Join 했을때
+	 * JPA에서 1:N의 관계를 설정하는 부분 FetchType.LAZY 두 테이블을 Join 했을때
 	 * 
-	 * master table의 데이터를 SELECT 한 후
-	 * 바로 slave table을 SELECT 하지 않고
-	 * slave table의 데이터가 필요한 시점에
-	 * SELECT를 수행하도록 하는 지연 옵션
+	 * master table의 데이터를 SELECT 한 후 바로 slave table을 SELECT 하지 않고 slave table의 데이터가
+	 * 필요한 시점에 SELECT를 수행하도록 하는 지연 옵션
 	 */
-	@OneToMany(mappedBy = "userVO",
-			cascade = {CascadeType.ALL},
-			fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userVO", cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private Set<UserRole> userRoles;
-	
+
 }
